@@ -11,7 +11,7 @@
   <archive_file>                        Required. Path to file
   --to <destination_folder>             Required. If it doesn't exist, it will be created
   --re "new_name"                       Optional. Rename the extracted folder
-  --from "..." or ...                   Possible name matches for the folder to extract from
+  --from "..." or ...                   Optional. Match a folder to extract from
 ```
 
 ## Building
