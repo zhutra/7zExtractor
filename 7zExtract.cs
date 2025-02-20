@@ -123,6 +123,8 @@ class SevenZExtract
             return;
         }
 
+        Console.Write("Extracting...");
+
         try
         {
             SevenZipBase.SetLibraryPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "7z.dll"));
@@ -180,7 +182,7 @@ class SevenZExtract
                     {
                         string originalPath = Path.Combine(destinationPath, matchedFolder);
                         string newPath = Path.Combine(destinationPath, newFolderName);
-                        
+
                         try
                         {
                             if (Directory.Exists(originalPath))
