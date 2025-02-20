@@ -192,7 +192,7 @@ class SevenZExtract
                         }
                         catch (Exception ex)
                         {
-                            Console.WriteLine($"Warning: Could not rename folder - {ex.Message}");
+                            Console.Write($"\nWarning: Could not rename folder - {ex.Message}");
                         }
                     }
                 }
@@ -222,9 +222,16 @@ class SevenZExtract
 
                                 foreach (string entry in allEntries)
                                 {
-                                    string fileName = Path.GetFileName(entry);
-                                    string newFilePath = Path.Combine(newFolderPath, fileName);
-                                    File.Move(entry, newFilePath);
+                                    string entryName = Path.GetFileName(entry);
+                                    string newPath = Path.Combine(newFolderPath, entryName);
+                                    if (Directory.Exists(entry))
+                                    {
+                                        Directory.Move(entry, newPath);
+                                    }
+                                    else
+                                    {
+                                        File.Move(entry, newPath);
+                                    }
                                 }
 
                                 if (dirs.Length == 0)
@@ -235,7 +242,7 @@ class SevenZExtract
                         }
                         catch (Exception ex)
                         {
-                            Console.WriteLine($"Warning: Could not organize files - {ex.Message}");
+                            Console.Write($"\nWarning: Could not organize files - {ex.Message}");
                         }
                     }
                 }
@@ -256,7 +263,7 @@ class SevenZExtract
             using var resourceStream = typeof(SevenZExtract).Assembly.GetManifestResourceStream("7z.dll");
             if (resourceStream == null)
             {
-                throw new Exception("Error:Could not find embedded 7z.dll");
+                throw new Exception("Error: Could not find embedded 7z.dll");
             }
 
             using var fileStream = new FileStream(dllPath, FileMode.Create);
