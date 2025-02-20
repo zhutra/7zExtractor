@@ -184,7 +184,7 @@ class SevenZExtract
 
                         try
                         {
-                            if (Directory.Exists(originalPath))
+                            if (Directory.Exists(originalPath) && !matchedFolder.Equals(newFolderName, StringComparison.OrdinalIgnoreCase))
                             {
                                 Directory.Move(originalPath, newPath);
                             }
@@ -210,9 +210,15 @@ class SevenZExtract
                             if (dirs.Length == 1 && allEntries.Length == 1)
                             {
                                 string originalPath = dirs[0];
+                                string finalPath = originalPath;
                                 string newPath = Path.Combine(destinationPath, newFolderName);
-                                Directory.Move(originalPath, newPath);
-                                ExtractNestedFiles(newPath);
+                                string currentName = Path.GetFileName(originalPath);
+                                if (!currentName.Equals(newFolderName, StringComparison.OrdinalIgnoreCase))
+                                {
+                                    Directory.Move(originalPath, newPath);
+                                    finalPath = newPath;
+                                }
+                                ExtractNestedFiles(finalPath);
                             }
                             else if (allEntries.Length > 0)
                             {
