@@ -213,7 +213,7 @@ class SevenZExtract
                                 Directory.Move(originalPath, newPath);
                                 ExtractNestedFiles(newPath);
                             }
-                            else if (dirs.Length == 0 && allEntries.Length > 0)
+                            else if (allEntries.Length > 0)
                             {
                                 string newFolderPath = Path.Combine(destinationPath, newFolderName);
                                 Directory.CreateDirectory(newFolderPath);
@@ -225,7 +225,10 @@ class SevenZExtract
                                     File.Move(entry, newFilePath);
                                 }
 
-                                ExtractNestedFiles(newFolderPath);
+                                if (dirs.Length == 0)
+                                {
+                                    ExtractNestedFiles(newFolderPath);
+                                }
                             }
                         }
                         catch (Exception ex)
