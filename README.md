@@ -10,7 +10,7 @@
 ```
   <archive_file>                        Required. Path to file
   --to <destination_folder>             Required. If it doesn't exist, it will be created
-  --re "new_name"                       Optional. Rename the extracted folder
+  --re "new_name"                       Optional. Rename the extracted folder with
   --from "..." or ...                   Optional. Match a folder to extract from
 ```
 
