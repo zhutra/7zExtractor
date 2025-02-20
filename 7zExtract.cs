@@ -16,7 +16,7 @@ class SevenZExtract
 
         if (toIndex <= 0 || toIndex == args.Length - 1)
         {
-            Console.WriteLine("Usage: 7zExtract.exe <archive_file> --to <destination_folder> [--re \"new_name\"] [--from \"folder1\" or \"folder2\" or ...]");
+            Console.Write("\nUsage: 7zExtract.exe <archive_file> --to <destination_folder> [--re \"new_name\"] [--from \"folder1\" or \"folder2\" or ...]");
             return;
         }
 
@@ -42,7 +42,7 @@ class SevenZExtract
             }
             else
             {
-                Console.WriteLine("Error: Unclosed quotes in archive path");
+                Console.Write("\nError: Unclosed quotes in archive path");
                 return;
             }
         }
@@ -74,7 +74,7 @@ class SevenZExtract
             }
             else
             {
-                Console.WriteLine("Error: Unclosed quotes in destination path");
+                Console.Write("\nError: Unclosed quotes in destination path");
                 return;
             }
         }
@@ -113,13 +113,13 @@ class SevenZExtract
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error: Could not process paths - {ex.Message}");
+            Console.Write($"\nError: Could not process paths - {ex.Message}");
             return;
         }
 
         if (!File.Exists(archivePath))
         {
-            Console.WriteLine($"Error: File not found - {archivePath}");
+            Console.Write($"\nError: File not found - {archivePath}");
             return;
         }
 
@@ -134,14 +134,13 @@ class SevenZExtract
                 string? matchedFolder = null;
                 if (fromPatterns.Any())
                 {
-                    var topLevelFolders = extractor.ArchiveFileNames
+                    var archiveNames = extractor.ArchiveFileNames.ToList();
+                    var topLevelFolders = archiveNames
                         .Select(name => name.Split(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar)[0])
-                        .Where(name =>
-                            extractor.ArchiveFileNames.Any(path =>
-                                path.StartsWith(name + Path.DirectorySeparatorChar) ||
-                                path.StartsWith(name + '/')
-                            )
-                        )
+                        .Where(name => archiveNames.Any(path =>
+                            path.Length > name.Length &&
+                            (path[name.Length] == Path.DirectorySeparatorChar || path[name.Length] == '/') &&
+                            path.StartsWith(name)))
                         .Distinct();
 
                     foreach (var pattern in fromPatterns)
@@ -250,7 +249,7 @@ class SevenZExtract
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error: Extraction failed - {ex.Message}");
+            Console.Write($"\nError: Extraction failed - {ex.Message}");
         }
     }
 
