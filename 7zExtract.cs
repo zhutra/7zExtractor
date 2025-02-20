@@ -161,7 +161,7 @@ class SevenZExtract
                     int currentPercentage = (int)e.PercentDone;
                     if (currentPercentage != lastPercentage)
                     {
-                        Console.Write($"\rExtracting: {currentPercentage}%".PadRight(Console.WindowWidth - 1));
+                        Console.Write($"\rExtracting: {currentPercentage}%");
                         lastPercentage = currentPercentage;
                     }
                 };
@@ -175,7 +175,7 @@ class SevenZExtract
                         .ToArray();
 
                     extractor.ExtractFiles(destinationPath, filesToExtract);
-                    Console.Write($"\nExtracted {matchedFolder}");
+                    Console.WriteLine($"\nExtracted {matchedFolder}");
 
                     if (newFolderName != null)
                     {
@@ -191,14 +191,14 @@ class SevenZExtract
                         }
                         catch (Exception ex)
                         {
-                            Console.Write($"\nWarning: Could not rename folder - {ex.Message}");
+                            Console.WriteLine($"\nWarning: Could not rename folder - {ex.Message}");
                         }
                     }
                 }
                 else
                 {
                     extractor.ExtractArchive(destinationPath);
-                    Console.Write("\nExtracted all files");
+                    Console.WriteLine("\nExtracted all files");
 
                     if (newFolderName != null)
                     {
@@ -241,7 +241,7 @@ class SevenZExtract
                         }
                         catch (Exception ex)
                         {
-                            Console.Write($"\nWarning: Could not organize files - {ex.Message}");
+                            Console.WriteLine($"\nWarning: Could not organize files - {ex.Message}");
                         }
                     }
                 }
@@ -249,7 +249,7 @@ class SevenZExtract
         }
         catch (Exception ex)
         {
-            Console.Write($"\nError: Extraction failed - {ex.Message}");
+            Console.WriteLine($"\nError: Extraction failed - {ex.Message}");
         }
     }
 
@@ -292,5 +292,6 @@ class SevenZExtract
                 continue;
             }
         }
+        Console.WriteLine();
     }
 }
