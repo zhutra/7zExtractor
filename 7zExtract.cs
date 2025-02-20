@@ -280,7 +280,13 @@ class SevenZExtract
     {
         var archiveExtensions = new[] { ".7z", ".zip", ".rar", ".iso", ".tar.gz" };
         var nestedArchives = Directory.GetFiles(folderPath)
-            .Where(f => archiveExtensions.Contains(Path.GetExtension(f).ToLower()));
+            .Where(f => archiveExtensions.Contains(Path.GetExtension(f).ToLower()))
+            .ToList();
+
+        if (nestedArchives.Count > 0)
+        {
+            Console.WriteLine($"\nFound {nestedArchives.Count} nested archive{(nestedArchives.Count > 1 ? "s" : "")}");
+        }
 
         foreach (string archive in nestedArchives)
         {
