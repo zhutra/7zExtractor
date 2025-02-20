@@ -24,7 +24,10 @@ Requirements:
 - [.NET Core SDK 6.0](https://dotnet.microsoft.com/download/dotnet-core/6.0)
 - [7z.dll](https://sourceforge.net/p/sevenzip/discussion/45798/thread/f4e969b197/#fb92) - add to project's directory
 
+## License
+
+The license for this project is available at [7-zip.org/license.txt](https://7-zip.org/license.txt).
+
 ## Credits
 
 This program makes use of the **7-Zip** library for archive extraction.  Thank you to Igor Pavlov from the [7-Zip](https://sourceforge.net/projects/sevenzip/) project, as well as Alexander Selishchev from the [SevenZipExtractor](https://github.com/adoconnection/SevenZipExtractor) repository.
-
